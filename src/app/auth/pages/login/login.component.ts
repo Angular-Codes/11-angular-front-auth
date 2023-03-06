@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -25,17 +26,17 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     const { email, password } = this.formLogin.value
     this.authService.login( email, password )
         .subscribe( ok =>  {
 
-          if( ok ) {
+          if( ok === true ) {
             this.router.navigateByUrl('/dashboard')
+          } else {
+            Swal.fire("Error", ok, 'error')
           }
 
         })
-
   }
 
 }
