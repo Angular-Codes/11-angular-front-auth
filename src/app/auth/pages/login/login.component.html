@@ -2,6 +2,7 @@
     class="login100-form" 
     autocomplete="off"
     [formGroup]="formLogin"
+    (ngSubmit)="login()"
 >
               
   <span class="login100-form-title p-b-49">
@@ -34,6 +35,7 @@
           <button 
             class="login100-form-btn"
             type="submit"
+            [disabled]="formLogin.invalid"
           >
               Login
           </button>
