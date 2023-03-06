@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 
 @Component({
@@ -10,7 +9,6 @@ import { AuthService } from '../../../auth/services/auth/auth.service';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private router: Router,
     private authService: AuthService
   ) { }
 
@@ -22,7 +20,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(){
-    this.router.navigateByUrl('/auth/login')
+    this.authService.logout();
   }
 
 }
