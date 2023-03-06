@@ -37,6 +37,22 @@ export class AuthService {
             );
   }
 
+  register( name: string, email: string, password: string ){
+    return this.http.post<AuthResponse>(`${this.baseUrl}/new`, { name, email, password })
+            .pipe(
+              tap( rest => {
+                if( !rest.ok ) return
+                localStorage.setItem('token', rest.token!)
+                this._user = {
+                    name: rest.name!,
+                    uid : rest.uid!,
+                }
+              }),
+              map( data => data.ok),
+              catchError( err => of(err.error.msg) )
+            );
+  }
+
   validateToken(): Observable<boolean> {
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');

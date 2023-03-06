@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
           } else {
             Swal.fire("Error", ok, 'error')
           }
-
         })
   }
 
